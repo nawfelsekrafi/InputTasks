@@ -20,9 +20,7 @@ export class UserComponent implements OnInit {
 
  
   ngOnInit(): void {
-    this.dataService.getPost().subscribe(post => {
-      this.posts = post;
-      });
+    
     this.name = "Omar Ben El Khattab";
     this.age = 30;
     this.address = {

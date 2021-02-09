@@ -1,0 +1,22 @@
+<h1>Posts</h1>
+
+
+ <button (click)="togglePost()">write a post ?</button>
+
+ <div *ngIf=write>
+    <h2>Write a Post</h2>
+    <form  (ngSubmit)="addPost()">
+        
+        <label for="title">Title:</label>
+        <input type="text"  [(ngModel)]="title" name="title">
+        <label for="body">Body:</label>
+        <input type="text"  [(ngModel)]="body" name="body">
+        <input type="submit" value="Submit" class="btn">
+    </form>
+</div>
+
+<div *ngFor="let post of posts">
+    <h4>{{ post.title }}</h4>
+    <p>{{post.body}}</p>
+    <button (click)="deletePost(post)">X</button>
+</div>

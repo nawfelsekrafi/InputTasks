@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/post';
 import { PostService } from '../../services/post.service';
 
+
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -48,5 +49,6 @@ export class PostComponent implements OnInit {
     this.postService.updatePost(post).subscribe();
   }
 
-
+  
+  
 }

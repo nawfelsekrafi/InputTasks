@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Post } from '../post';
-import { Observable } from 'rxjs';
+import { Observable,of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,7 +18,9 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   getPosts():Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.postUrl}${this.post_limit}`);
+    return this.http.get<Post[]>(`${this.postUrl}${this.post_limit}`).pipe(
+      catchError(this.handleError<Post[]>('getPosts', []))
+    );;
   }
 
   addPost(post: Post): Observable<Post>{
@@ -34,4 +37,17 @@ export class PostService {
     return this.http.delete<Post>(url,httpOptions);
   }
 
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+  
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+  
+     
+  
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+}
 }

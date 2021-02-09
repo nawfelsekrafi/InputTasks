@@ -1,34 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Testability } from '@angular/core';
+import { Post } from 'src/app/post';
 import { DataService } from '../../services/data.service';
-
+import { Address } from '../../address';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  isEdit :boolean = false;
   name: string;
   age: number;
-  email: string;
+  email: string = "test@Test.com";
   address: Address;
   hobbies: string[];
   hello: any;
+  posts: Post[];
   constructor(private dataService: DataService) { }
 
+ 
   ngOnInit(): void {
-    this.name = "Nawfel Sekrafi";
+    this.dataService.getPost().subscribe(post => {
+      this.posts = post;
+      });
+    this.name = "Omar Ben El Khattab";
     this.age = 30;
     this.address = {
-      street: "amal",
-      city: "gabes",
-      state: "Medenine"
+      street: "Makka",
+      city: "The Arabian Peninsula",
+      state: "no Were"
     }
-    this.hobbies = ['write code', 'reading', 'walking'];
+    this.hobbies = ['write code', 'reading', 'walking','Justice'];
     this.hello = 'hahah';
   }
 
   onClick(){
-    this.name = "Hey - Sekrafi";
+    this.name = "Hey - Omar";
   }
 
   addHobby(hobby){
@@ -41,10 +48,9 @@ export class UserComponent implements OnInit {
     this.hobbies.splice(i,1);
   }
 
+  toggleEdit(){
+    this.isEdit = !this.isEdit;
+  }
+
 }
 
-interface Address {
-  street: string,
-    city: string,
-    state: string
-}

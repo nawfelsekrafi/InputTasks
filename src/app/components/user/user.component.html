@@ -2,11 +2,13 @@
 <ul>
     <li>Age: {{age}}</li>
     <li>Email: {{email}}</li>
-    <li>Address: {{address.state}}, {{address.city}}, {{address.street}}</li>
+    <li>Address: {{address.street}}, {{address.city}},{{address.state}}</li>
 </ul>
 
 <button (click) = "onClick()">Click Me</button>
+<button (click) = "toggleEdit()">Edit User</button>
 
+<div *ngIf=isEdit>
 <h1>Edit User</h1>
 <form >
     <div>
@@ -25,6 +27,8 @@
 
     </div>
 </form>
+</div>
+
 
 <h1>Hobbies</h1>
 
@@ -45,4 +49,10 @@
     {{i+1}}-{{h}} <button (click)="deleteHobby(i)">x</button>
 </li>
 </ul>
-made with ❤️ by nawfel
+
+<h1>Posts</h1>
+<div *ngFor="let post of posts">
+    <h4>{{ post.title }}</h4>
+    <p>{{ post.body }}</p>
+</div>
+<div style="text-align: center;">made with ❤️ by nawfel</div>
